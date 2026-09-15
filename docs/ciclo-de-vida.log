@@ -1,0 +1,42 @@
+--------- beginning of main
+09-15 02:31:30.266  5281  5281 D CicloDeVida: MainActivity.onCreate (nueva)
+09-15 02:31:30.378  5281  5281 D CicloDeVida: MainActivity.onStart
+09-15 02:31:30.386  5281  5281 D CicloDeVida: MainActivity.onResume
+09-15 02:31:36.161  5281  5281 D CicloDeVida: MainActivity.onPause
+09-15 02:31:36.208  5281  5281 D CicloDeVida: DetalleCanchaActivity.onCreate (nueva)
+09-15 02:31:36.273  5281  5281 D CicloDeVida: DetalleCanchaActivity.onStart
+09-15 02:31:36.276  5281  5281 D CicloDeVida: DetalleCanchaActivity.onResume
+09-15 02:31:37.205  5281  5281 D CicloDeVida: MainActivity.onStop
+09-15 02:31:37.207  5281  5281 D CicloDeVida: MainActivity.onSaveInstanceState
+09-15 02:31:41.148  5281  5281 D CicloDeVida: DetalleCanchaActivity.onPause
+09-15 02:31:41.206  5281  5281 D CicloDeVida: ReservaActivity.onCreate (nueva)
+09-15 02:31:41.299  5281  5281 D CicloDeVida: ReservaActivity.onStart
+09-15 02:31:41.300  5281  5281 D CicloDeVida: ReservaActivity.onResume
+09-15 02:31:42.214  5281  5281 D CicloDeVida: DetalleCanchaActivity.onStop
+09-15 02:31:42.215  5281  5281 D CicloDeVida: DetalleCanchaActivity.onSaveInstanceState
+09-15 02:31:51.820  5281  5281 D CicloDeVida: ReservaActivity.onPause
+09-15 02:31:51.826  5281  5281 D CicloDeVida: ReservaActivity.onStop
+09-15 02:31:51.828  5281  5281 D CicloDeVida: ReservaActivity.onSaveInstanceState
+09-15 02:31:51.828  5281  5281 D CicloDeVida: ReservaActivity.onDestroy
+09-15 02:31:51.885  5281  5281 D CicloDeVida: ReservaActivity.onCreate (recreada, con estado guardado)
+09-15 02:31:51.963  5281  5281 D CicloDeVida: ReservaActivity.onStart
+09-15 02:31:51.973  5281  5281 D CicloDeVida: ReservaActivity.onResume
+09-15 02:31:56.537  5281  5281 D CicloDeVida: ReservaActivity.onPause
+09-15 02:31:56.545  5281  5281 D CicloDeVida: ReservaActivity.onStop
+09-15 02:31:56.548  5281  5281 D CicloDeVida: ReservaActivity.onSaveInstanceState
+09-15 02:31:56.548  5281  5281 D CicloDeVida: ReservaActivity.onDestroy
+09-15 02:31:56.589  5281  5281 D CicloDeVida: ReservaActivity.onCreate (recreada, con estado guardado)
+09-15 02:31:56.649  5281  5281 D CicloDeVida: ReservaActivity.onStart
+09-15 02:31:56.656  5281  5281 D CicloDeVida: ReservaActivity.onResume
+09-15 02:32:01.785  5281  5281 D CicloDeVida: ReservaActivity.onPause
+09-15 02:32:01.847  5281  5281 D CicloDeVida: DetalleCanchaActivity.onRestart
+09-15 02:32:01.849  5281  5281 D CicloDeVida: DetalleCanchaActivity.onStart
+09-15 02:32:03.727  5281  5281 D CicloDeVida: ReservaActivity.onStop
+09-15 02:32:03.729  5281  5281 D CicloDeVida: ReservaActivity.onDestroy
+09-15 02:32:05.256  5281  5281 D CicloDeVida: DetalleCanchaActivity.onResume
+09-15 02:32:11.279  5281  5281 D CicloDeVida: DetalleCanchaActivity.onPause
+09-15 02:32:13.685  5281  5281 D CicloDeVida: DetalleCanchaActivity.onStop
+09-15 02:32:13.686  5281  5281 D CicloDeVida: DetalleCanchaActivity.onSaveInstanceState
+09-15 02:32:18.848  5281  5281 D CicloDeVida: DetalleCanchaActivity.onRestart
+09-15 02:32:18.849  5281  5281 D CicloDeVida: DetalleCanchaActivity.onStart
+09-15 02:32:18.849  5281  5281 D CicloDeVida: DetalleCanchaActivity.onResume
