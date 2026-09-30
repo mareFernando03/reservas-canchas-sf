@@ -12,8 +12,8 @@
 
 Según la guía del TP2: aplicar el ciclo Build-Measure-Learn en el desarrollo de una aplicación
 móvil. Se parte de la app del TP1 (Reservas Canchas SF), se define su Producto Mínimo Viable,
-se construye con Firebase Authentication, se prueba con usuarios reales y con lo aprendido se
-actualiza el diagrama de arquitectura.
+se construye con Firebase Authentication, se evalúa y con lo aprendido se actualiza el diagrama
+de arquitectura.
 
 ## 2. Definición del MVP
 
@@ -104,15 +104,20 @@ cerrar sesión, el error con contraseña incorrecta y el error con campos vacío
 
 ## 4. Medición y aprendizaje
 
+> **Alcance de esta evaluación.** Para esta entrega **no se hicieron pruebas con usuarios reales**.
+> Se hizo un recorrido de las tareas sobre la app en el emulador y se verificó la medición de
+> eventos. Lo que depende de la opinión de los usuarios (si usarían la app y si pagarían la seña)
+> queda sin validar y se indica como tal. El guion para las pruebas con usuarios está listo en
+> `docs/TP2-guion-pruebas.md`.
+
 ### 4.1. Cómo se midió
 
-De los diez métodos de prueba de UX que lista el capítulo 6 se usaron tres: *task analysis*
-(observar a la persona mientras hace tareas concretas), *moderated in-person testing* (prueba
-presencial, la que el libro recomienda para móviles) y una encuesta corta al final.
-
-- **Pruebas con usuarios:** [N] personas usaron la app en [dispositivo] siguiendo el guion de
-  `docs/TP2-guion-pruebas.md`: cinco tareas sin ayuda y cuatro preguntas al final.
-- **Eventos de uso en Firebase Analytics:**
+- **Recorrido de las tareas (*task analysis*).** De los métodos de prueba que lista el capítulo 6,
+  se aplicó el análisis de tareas: se ejecutaron sobre la app, en el emulador (Pixel, Android 16),
+  las cinco tareas del guion por el camino más corto que ofrece la interfaz. Se contaron los
+  toques y las pantallas de cada una y se anotó dónde el recorrido obliga a adivinar o no da lo
+  que el usuario esperaría.
+- **Eventos de uso en Firebase Analytics.** La app registra estos eventos:
 
 | Evento | Cuándo se registra |
 |---|---|
@@ -123,29 +128,63 @@ presencial, la que el libro recomienda para móviles) y una encuesta corta al fi
 | `confirmar_reserva` | Al confirmar el turno (con la cantidad de horas). |
 
 La relación entre `iniciar_reserva` y `confirmar_reserva` indica cuántos de los que empiezan una
-reserva la terminan. Durante las pruebas el teléfono queda en modo depuración, así que los eventos
-se ven en el momento en *DebugView*:
+reserva la terminan. Con el teléfono en modo depuración los eventos se ven en el momento en
+*DebugView*; se verificó que llegan con sus parámetros:
 
-<figure class="ancha"><img src="capturas/13-debugview-eventos.jpg"><figcaption>13. DebugView de Firebase Analytics recibiendo los eventos de una reserva de prueba</figcaption></figure>
+<figure class="ancha"><img src="capturas/13-debugview-eventos.jpg"><figcaption>13. DebugView de Firebase Analytics recibiendo los eventos de una reserva del recorrido</figcaption></figure>
 
 ### 4.2. Resultados
 
-<!-- TODO completar con los datos reales de las pruebas -->
+| Tarea | Toques | Pantallas | Qué se observó |
+|---|---|---|---|
+| 1. Crear una cuenta | 3 | 2 | Se completa sin problemas. El mínimo de 6 caracteres de la contraseña recién aparece como error después de intentar. No hay forma de recuperar la contraseña. |
+| 2. Precio de la cancha de pádel | 0 | 1 | El precio se ve directo en la lista. No hay filtro por deporte: con 4 canchas no hace falta, con más sí. |
+| 3. Reservar fútbol 7 el sábado a las 20 h por 2 h y compartir | 8 + elegir la app | 4 | Día, hora y duración se eligen bien y el total ($90000) se actualiza. Al confirmar se abre directamente la hoja de compartir: no hay pantalla de confirmación y **la reserva no se guarda**; sólo queda un texto en el detalle de la cancha, que se pierde al salir. Tampoco se ve si el horario está libre. |
+| 4. Comunicarse con el club de la cancha 1 | 2 | 3 | Abre el marcador con el número cargado. La única vía es el teléfono, aunque en San Francisco los turnos también se piden por WhatsApp (sección 2). |
+| 5. Cerrar sesión y volver a entrar | 5 | 2 | Funciona, pero "Cerrar sesión" está dentro del menú de tres puntos y no se ve a primera vista. |
+
+Los precios se muestran sin separador de miles ($24000, $90000) en todas las pantallas.
+
+<div class="capturas">
+<figure><img src="capturas/14-recorrido-reserva.png"><figcaption>14. Tarea 3: sábado 20:00, 2 h</figcaption></figure>
+<figure><img src="capturas/15-recorrido-compartir.png"><figcaption>15. Al confirmar se abre compartir</figcaption></figure>
+</div>
 
 ### 4.3. Análisis y aprendizaje
 
-<!-- TODO, con los pasos del libro: Analyze (qué surgió), Organize (patrones que se repiten),
-     Compile (acciones concretas). Cerrar con la decisión de la fase Learn: perseverar o pivotar,
-     respondiendo si resuelve el problema y si es viable. -->
+Siguiendo los pasos de la fase *Measure* del libro:
+
+- **Analizar.** Las cinco tareas se pueden completar y ninguna pasa de 8 toques más la elección de
+  la app para compartir. La propuesta central (ver canchas y precios en un solo lugar) funciona sin
+  tocar nada.
+- **Organizar.** Los problemas se agrupan en dos: (1) **la reserva no es real**: no se guarda y no
+  muestra disponibilidad, así que el usuario igual tendría que llamar para confirmar; y (2)
+  **detalles de interfaz**: formato de precios, reglas de la contraseña a la vista, cerrar sesión
+  escondido y falta de WhatsApp.
+- **Compilar (acciones para la próxima iteración).**
+  1. Guardar las reservas y mostrar la disponibilidad real (RF08), con una pantalla "Mis reservas".
+  2. Agregar "Escribir por WhatsApp" junto a "Llamar al club".
+  3. Formatear los precios con separador de miles y mostrar el mínimo de la contraseña en el campo.
+
+**Decisión de la fase *Learn*.** El libro pide responder si el MVP resuelve un problema de sus
+usuarios y si es viable. Con un recorrido sin usuarios esas dos preguntas **no se pueden
+responder**: quedan para las pruebas del guion. Lo que sí muestra el recorrido es que, mientras la
+reserva no se guarde, la app no reemplaza la llamada al club, que es justamente lo que plantea la
+hipótesis. Por eso se **persevera** con el MVP y la próxima iteración empieza por guardar las
+reservas, antes de validarlo con usuarios.
 
 ## 5. Diagrama de arquitectura actualizado
 
 <figure class="ancha"><img src="arquitectura-tp2.svg"><figcaption>Arquitectura después del TP2. En línea punteada, el componente propuesto.</figcaption></figure>
 
 Respecto del TP1 se agregan la pantalla de login, la medición de uso y los servicios de Firebase
-Authentication y Analytics. Como componente adicional se propone **Cloud Firestore**, para
-guardar las reservas y mostrar la disponibilidad real de cada horario (RF08).
-<!-- TODO: ajustar los componentes propuestos según lo que salga de las pruebas -->
+Authentication y Analytics. Según lo que mostró el recorrido (sección 4.3) se proponen dos
+componentes adicionales, en línea punteada:
+
+- **Cloud Firestore**, para guardar las reservas y mostrar la disponibilidad real de cada horario
+  (RF08). Es el cambio que hace falta para que la reserva reemplace a la llamada al club.
+- **WhatsApp** como otra forma de contactar al club, con un Intent implícito como los que ya usa
+  la app para llamar y compartir.
 
 ## 6. Repositorio
 

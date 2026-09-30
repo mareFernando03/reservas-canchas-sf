@@ -39,8 +39,10 @@ hr { border: 0; border-top: 1px solid #ccc; }
 .capturas figure { width: 31%; margin: 0 0 8px; break-inside: avoid; }
 .capturas img { width: 100%; border: 1px solid #ccc; }
 figure.ancha { margin: 10px 0; break-inside: avoid; text-align: center; }
-figure.ancha img { max-width: 100%; border: 1px solid #ccc; }
+figure.ancha img { max-width: 100%; max-height: 90mm; border: 1px solid #ccc; }
 figcaption { font-size: 8.5pt; color: #555; text-align: center; margin-top: 3px; }
+blockquote { margin: 8px 0; padding: 6px 10px; border-left: 4px solid #3b6fb6; background: #eef3fa; }
+blockquote p { margin: 0; }
 .pendiente { background: #fff3b0; border: 1px solid #e0b000; padding: 6px 8px; margin: 8px 0; font-size: 9.5pt; }
 """
 html = f"""<!doctype html><html lang="es"><head><meta charset="utf-8">

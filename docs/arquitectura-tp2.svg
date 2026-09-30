@@ -83,12 +83,18 @@
   <!-- Apps externas -->
   <rect class="grupo" x="20" y="460" width="560" height="96" rx="10"/>
   <text class="titulo" x="36" y="484">Otras apps del teléfono (Intents implícitos)</text>
-  <rect class="caja" x="40" y="498" width="160" height="40" rx="6"/>
-  <text class="nombre" x="52" y="523">Marcador (DIAL)</text>
-  <rect class="caja" x="220" y="498" width="160" height="40" rx="6"/>
-  <text class="nombre" x="232" y="523">Mapas (VIEW geo:)</text>
-  <rect class="caja" x="400" y="498" width="160" height="40" rx="6"/>
-  <text class="nombre" x="412" y="523">Compartir (SEND)</text>
+  <rect class="caja" x="36" y="496" width="120" height="44" rx="6"/>
+  <text class="nombre" x="46" y="515">Marcador</text>
+  <text class="detalle" x="46" y="531">ACTION_DIAL</text>
+  <rect class="caja" x="166" y="496" width="120" height="44" rx="6"/>
+  <text class="nombre" x="176" y="515">Mapas</text>
+  <text class="detalle" x="176" y="531">ACTION_VIEW geo:</text>
+  <rect class="caja" x="296" y="496" width="120" height="44" rx="6"/>
+  <text class="nombre" x="306" y="515">Compartir</text>
+  <text class="detalle" x="306" y="531">ACTION_SEND</text>
+  <rect class="propuesto" x="426" y="496" width="136" height="44" rx="6"/>
+  <text class="nombre" x="436" y="515">WhatsApp</text>
+  <text class="detalle" x="436" y="531">propuesto: contactar club</text>
 
   <!-- Referencia -->
   <rect class="propuesto" x="640" y="480" width="40" height="22" rx="4"/>
