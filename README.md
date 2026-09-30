@@ -17,6 +17,12 @@ Todas heredan de `CicloDeVidaActivity`, que registra cada callback del ciclo de 
 (filtro `CicloDeVida`). La duración del turno se guarda en `onSaveInstanceState` para que
 sobreviva a la rotación. Los datos de canchas son de ejemplo y viven en memoria.
 
+## TP2 — Ciclo Build-Measure-Learn
+
+MVP con login por Firebase Authentication (`LoginActivity`, email y contraseña) y medición de uso
+con Firebase Analytics (`Medicion`). Informe en `docs/TP2-informe.md`, guion de pruebas con
+usuarios en `docs/TP2-guion-pruebas.md` y diagrama en `docs/arquitectura-tp2.svg`.
+
 ## Compilar
 
 Abrir la carpeta en Android Studio, o desde la terminal:
@@ -25,4 +31,4 @@ Abrir la carpeta en Android Studio, o desde la terminal:
 ./gradlew assembleDebug
 ```
 
-Requiere Android SDK Platform 36. `minSdk` 26 (Android 8.0).
+Requiere Android SDK Platform 36 y el `google-services.json` del proyecto de Firebase en `app/`. `minSdk` 26 (Android 8.0).

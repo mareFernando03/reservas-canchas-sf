@@ -17,4 +17,16 @@
     <string name="confirmar_reserva">Confirmar reserva</string>
     <string name="compartir_con">Compartir reserva con…</string>
     <string name="mensaje_compartir">Reservé %1$s en %2$s para el %3$s. ¿Venís?</string>
+    <string name="login_titulo">Ingresá para reservar</string>
+    <string name="email">Email</string>
+    <string name="clave">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="error_campos_vacios">Completá el email y la contraseña</string>
+    <string name="error_clave_debil">La contraseña tiene que tener al menos 6 caracteres</string>
+    <string name="error_email_en_uso">Ya hay una cuenta con ese email: usá Ingresar</string>
+    <string name="error_credenciales">Email o contraseña incorrectos</string>
+    <string name="error_sin_conexion">Sin conexión a internet</string>
+    <string name="error_desconocido">No se pudo ingresar. Probá de nuevo</string>
 </resources>

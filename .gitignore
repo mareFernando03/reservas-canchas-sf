@@ -9,3 +9,6 @@
 /captures/
 .externalNativeBuild/
 .cxx/
+
+# Configuración del proyecto de Firebase: se descarga de la consola (ver README)
+app/google-services.json

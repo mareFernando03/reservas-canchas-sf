@@ -40,18 +40,26 @@ class DetalleCanchaActivity : CicloDeVidaActivity() {
         findViewById<TextView>(R.id.textoDireccion).text = cancha.direccion
         findViewById<TextView>(R.id.textoPrecio).text = getString(R.string.precio_hora, cancha.precioHora)
 
+        // Sólo la primera vez: al rotar la pantalla la Activity se recrea y contaría doble.
+        if (savedInstanceState == null) {
+            Medicion.evento(this, Medicion.VER_CANCHA, "cancha" to cancha.nombre)
+        }
+
         // Intent implícito: no decimos qué app abrir, sólo la acción. Android elige el marcador.
         findViewById<Button>(R.id.botonLlamar).setOnClickListener {
+            Medicion.evento(this, Medicion.LLAMAR_CLUB, "cancha" to cancha.nombre)
             abrir(Intent(Intent.ACTION_DIAL, Uri.parse("tel:${cancha.telefono}")))
         }
 
         // Intent implícito con esquema geo: lo atiende la app de mapas que haya instalada.
         findViewById<Button>(R.id.botonMapa).setOnClickListener {
+            Medicion.evento(this, Medicion.VER_MAPA, "cancha" to cancha.nombre)
             val uri = Uri.parse("geo:${cancha.latitud},${cancha.longitud}?q=${Uri.encode(cancha.direccion + ", San Francisco, Córdoba")}")
             abrir(Intent(Intent.ACTION_VIEW, uri))
         }
 
         findViewById<Button>(R.id.botonReservar).setOnClickListener {
+            Medicion.evento(this, Medicion.INICIAR_RESERVA, "cancha" to cancha.nombre)
             val intent = Intent(this, ReservaActivity::class.java)
             intent.putExtra(EXTRA_CANCHA_ID, cancha.id)
             reservar.launch(intent)

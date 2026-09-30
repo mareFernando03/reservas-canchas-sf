@@ -50,6 +50,7 @@ class ReservaActivity : CicloDeVidaActivity() {
 
         findViewById<Button>(R.id.botonConfirmar).setOnClickListener {
             val turno = "${spinnerDia.selectedItem} ${spinnerHora.selectedItem} ($horas h)"
+            Medicion.evento(this, Medicion.CONFIRMAR_RESERVA, "cancha" to cancha.nombre, "horas" to horas.toLong())
 
             val compartir = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
