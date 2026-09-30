@@ -1,9 +1,9 @@
 # Trabajo Práctico 2 — Aplicación del Ciclo de Build-Measure-Learn
 
-**Cátedra:** Arquitecturas Móviles · Ing. Juan Pablo Bono
-**Carrera:** Ingeniería en Sistemas de Información — UTN FR San Francisco
-**Alumno:** Fernando Mare
-**Fecha:** 01/10/2026
+**Cátedra:** Arquitecturas Móviles · Ing. Juan Pablo Bono  
+**Carrera:** Ingeniería en Sistemas de Información — UTN FR San Francisco  
+**Alumno:** Fernando Mare  
+**Fecha:** 01/10/2026  
 **Repositorio:** https://github.com/mareFernando03/reservas-canchas-sf
 
 ---
