@@ -124,16 +124,22 @@ registrar una app todavía no publicada: se crea la cuenta, se registra la app y
 de anuncios de tipo banner. En el código se dejan los IDs de prueba hasta publicar, para no generar
 clics inválidos.
 
-<!-- TODO: crear la cuenta de AdMob, registrar la app (sin publicar) y crear el bloque banner; agregar la captura como figura y reemplazar este recuadro por "Se creó la cuenta, se registró la app y se creó el bloque (figura X)". -->
+Se creó la cuenta de AdMob, se registró la app como todavía no publicada (Android, "Reservas
+Canchas SF") y se creó un bloque de anuncios de tipo banner, "Banner lista de canchas" (figura 1).
+AdMob marca la app como pendiente de revisión: para que muestre anuncios reales falta completar
+el perfil de pagos y publicar la app en Google Play, y hasta entonces el código sigue con los
+IDs de prueba. Al publicar, los dos IDs de prueba se reemplazan por los que muestra la figura.
+
+<figure class="ancha"><img src="capturas/29-admob-bloque-banner.jpg"><figcaption>Figura 1. Bloque de anuncios banner creado en AdMob</figcaption></figure>
 
 ### 4.3. Prueba
 
 Se probó en el emulador de Android Studio (Pixel, Android 16), con el login contra el emulador
 local de Firebase Authentication como en los prácticos anteriores. Al abrir la lista, el SDK
 inicializa, pide el anuncio y el banner de prueba aparece al pie, debajo de las canchas, sin tapar
-la lista (figura 1).
+la lista (figura 2).
 
-<figure class="ancha"><img src="capturas/20-lista-con-banner.png"><figcaption>Figura 1. Lista de canchas con el banner de prueba de AdMob al pie</figcaption></figure>
+<figure class="ancha"><img src="capturas/20-lista-con-banner.png"><figcaption>Figura 2. Lista de canchas con el banner de prueba de AdMob al pie</figcaption></figure>
 
 ## 5. Configuración en Google Play Console
 
@@ -177,7 +183,7 @@ contra el servicio de facturación de Google Play. También con línea punteada,
 los clubes contratan el plan mensual. El diagrama incluye lo integrado en los TP6 (notificaciones)
 y TP7, hechos en paralelo.
 
-<figure class="ancha grande"><img src="arquitectura-tp4.svg"><figcaption>Figura 2. Arquitectura de la app con los componentes de monetización</figcaption></figure>
+<figure class="ancha grande"><img src="arquitectura-tp4.svg"><figcaption>Figura 3. Arquitectura de la app con los componentes de monetización</figcaption></figure>
 
 ## Referencias
 
