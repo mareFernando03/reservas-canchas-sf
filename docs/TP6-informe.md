@@ -59,7 +59,7 @@ usuario vuelva a reservar por WhatsApp.
 |---|---|---|---|---|
 | 1 | **Recordatorio del turno**, dos horas antes del partido. | Notificación local | No olvidarse del partido y tener tiempo de avisar al grupo. | **Implementada** |
 | 2 | **Recordatorio por inactividad**: si pasan 7 días sin abrir la app, una invitación a armar un partido. Se cancela cada vez que el usuario vuelve. | Notificación local | Un empujón para volver a jugar, sólo si se olvidó de la app. | **Implementada** |
-| 3 | **Novedades segmentadas por deporte**: promociones y canchas nuevas, sólo del deporte que el usuario juega. | Push (FCM, temas) | Enterarse de lo que le interesa, sin recibir lo que no. | **Implementada** (falta enviar la campaña, sección 5) |
+| 3 | **Novedades segmentadas por deporte**: promociones y canchas nuevas, sólo del deporte que el usuario juega. | Push (FCM, temas) | Enterarse de lo que le interesa, sin recibir lo que no. | **Implementada y probada** (sección 5) |
 | 4 | **Premio por constancia**: la 10.ª reserva con un descuento en la seña, acordado con los clubes. | Incentivación (premio del mundo real) | Un beneficio concreto por seguir usando la app. | Propuesta |
 | 5 | **Aviso "se liberó un turno"** en una cancha y horario que el usuario ya buscó y estaba ocupado. | Push personalizado | Conseguir el turno que quería. | Propuesta (necesita el backend del TP3) |
 | 6 | **Racha de partidos**: una insignia al reservar 3, 5 y 10 semanas seguidas, visible arriba de la lista de canchas. | Gamificación (premio digital) | Ver su constancia y no querer cortar la racha. | Propuesta |
@@ -150,7 +150,28 @@ el backend es lo que haría falta para la estrategia 5.
 con título y texto, destino por **tema** (por ejemplo, `deporte_padel`) y horario de envío. La
 consola muestra después cuántos la recibieron y la abrieron.
 
-<!-- TODO: enviar desde la consola de Firebase (1) una campaña al tema "novedades" con la app en segundo plano y otra con la app abierta, y capturar las dos notificaciones; (2) una campaña al tema "deporte_padel" y comprobar que NO llega a un teléfono que sólo reservó fútbol; (3) capturar el informe de la campaña en la consola (recibidas y abiertas). Completar esta sección con el resultado. -->
+**Campañas enviadas.** El 21/10 se enviaron cuatro campañas de prueba desde la consola, con el
+emulador como destinatario. El emulador estaba suscripto a `novedades` y, por las reservas hechas
+en las pruebas, a `deporte_futbol5` y `deporte_futbol7`; nunca reservó pádel.
+
+| Campaña | Tema | Estado de la app | Resultado |
+|---|---|---|---|
+| "Novedades de Reservas Canchas SF" | `novedades` | En segundo plano | Llegó a los ~30 s; la mostró el sistema, con el ícono configurado (figura 1). Al tocarla, Analytics registró `abrir_desde_notificacion` con `origen=push` (verificado en el registro de Analytics del emulador). |
+| "Novedades (app abierta)" | `novedades` | En primer plano | Llegó a los ~20 s y la mostró `MensajesPush`: con la app abierta, Android no muestra solo un push (figura 2). |
+| "Promo de pádel (prueba)" | `deporte_padel` | En primer plano | **No llegó** en los dos minutos siguientes: el emulador no está en ese tema. |
+| "Promo de fútbol 7 (prueba)" | `deporte_futbol7` | En primer plano | Llegó a los ~25 s (figura 3). Es el control de la anterior: el mismo envío, a un tema en el que el emulador sí está. |
+
+La consola muestra las cuatro campañas como completadas (figura 4). Para cantidades chicas no da
+el número exacto de envíos ("<1.000"), y las aperturas aparecen en la consola con demora, cuando
+Analytics procesa los eventos; por eso la apertura se verificó en el registro del dispositivo.
+
+<div class="capturas">
+<figure><img src="capturas/25-push-segundo-plano.png"><figcaption>Figura 1. Campaña recibida con la app en segundo plano</figcaption></figure>
+<figure><img src="capturas/26-push-primer-plano.png"><figcaption>Figura 2. Campaña recibida con la app abierta</figcaption></figure>
+<figure><img src="capturas/27-push-segmentado.png"><figcaption>Figura 3. Llega la de fútbol 7; la de pádel no</figcaption></figure>
+</div>
+
+<figure class="ancha"><img src="capturas/28-consola-campanas.jpg"><figcaption>Figura 4. Las cuatro campañas en la consola de Firebase</figcaption></figure>
 
 ## 6. Pruebas
 
@@ -160,18 +181,19 @@ segundos. Con la compilación normal se usan las esperas reales.
 
 | Prueba | Resultado |
 |---|---|
-| Abrir la reserva por primera vez | Android pide el permiso de notificaciones (figura 1). |
-| Confirmar una reserva | A los 10 s llega "Hoy jugás", con la cancha, el club y la hora (figura 2). |
+| Abrir la reserva por primera vez | Android pide el permiso de notificaciones (figura 5). |
+| Confirmar una reserva | A los 10 s llega "Hoy jugás", con la cancha, el club y la hora (figura 6). |
 | Rechazar el permiso de notificaciones y confirmar una reserva | La reserva se confirma y el recordatorio se programa, pero la app no publica ninguna notificación. |
 | Quedarse 30 s en el detalle de una cancha, sin salir de la app | No llega el recordatorio por inactividad: la app sigue en primer plano. |
-| Salir de la app con el botón de inicio | A los 20 s llega "¿Armamos un partido?", en el canal de novedades (figura 3). |
+| Salir de la app con el botón de inicio | A los 20 s llega "¿Armamos un partido?", en el canal de novedades (figura 7). |
 | Token de FCM | Se genera al abrir la app y se registra en el log. |
 
 <div class="capturas">
-<figure><img src="capturas/21-permiso-notificaciones.png"><figcaption>Figura 1. Permiso de notificaciones al reservar</figcaption></figure>
-<figure><img src="capturas/22-recordatorio-turno.png"><figcaption>Figura 2. Recordatorio del turno</figcaption></figure>
-<figure><img src="capturas/23-recordatorio-inactividad.png"><figcaption>Figura 3. Recordatorio por inactividad</figcaption></figure>
+<figure><img src="capturas/21-permiso-notificaciones.png"><figcaption>Figura 5. Permiso de notificaciones al reservar</figcaption></figure>
+<figure><img src="capturas/22-recordatorio-turno.png"><figcaption>Figura 6. Recordatorio del turno</figcaption></figure>
+<figure><img src="capturas/23-recordatorio-inactividad.png"><figcaption>Figura 7. Recordatorio por inactividad</figcaption></figure>
 </div>
+
 
 ## 7. Diagrama de arquitectura actualizado
 
@@ -181,7 +203,7 @@ los dos caminos de un push: con la app en segundo plano lo muestra el SDK direct
 app abierta pasa por `MensajesPush`. Con línea punteada, la API de reservas del TP3, propuesta
 para el aviso de turno liberado: enviaría el push al token del usuario.
 
-<figure class="ancha grande"><img src="arquitectura-tp6.svg"><figcaption>Figura 4. Arquitectura de la app con los mecanismos de retención</figcaption></figure>
+<figure class="ancha"><img src="arquitectura-tp6.svg" style="max-height: 120mm"><figcaption>Figura 8. Arquitectura de la app con los mecanismos de retención</figcaption></figure>
 
 ## Referencias
 
