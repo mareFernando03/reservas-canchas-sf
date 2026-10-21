@@ -29,4 +29,15 @@
     <string name="error_credenciales">Email o contraseña incorrectos</string>
     <string name="error_sin_conexion">Sin conexión a internet</string>
     <string name="error_desconocido">No se pudo ingresar. Probá de nuevo</string>
+    <string name="clima_cargando">Consultando el pronóstico…</string>
+    <string name="clima_turno">Pronóstico para el turno: %1$d °C · %2$d %% de probabilidad de lluvia</string>
+    <string name="clima_no_disponible">Pronóstico no disponible</string>
+    <string name="mapa_descripcion">Ubicación de la cancha</string>
+    <string name="distancia_km">a %1$.1f km</string>
+    <string name="canal_recordatorios">Recordatorios de turnos</string>
+    <string name="canal_novedades">Novedades y promociones</string>
+    <string name="recordatorio_turno_titulo">Hoy jugás ⚽</string>
+    <string name="recordatorio_turno_texto">Tu turno en %1$s (%2$s) es a las %3$d:00. ¿Ya confirmaste a todos?</string>
+    <string name="inactividad_titulo">¿Armamos un partido?</string>
+    <string name="inactividad_texto">Hace una semana que no reservás. ¿Armamos uno para esta noche?</string>
 </resources>

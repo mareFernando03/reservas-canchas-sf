@@ -1,0 +1,50 @@
+# Despliegue en Google Cloud Run con autoescalado (TP3). NO está desplegado: requiere un
+# proyecto de Google Cloud con facturación habilitada (pide una tarjeta), y Memorystore no tiene
+# capa gratuita. Para desplegarlo:
+#   gcloud services enable run.googleapis.com redis.googleapis.com artifactregistry.googleapis.com cloudbuild.googleapis.com
+#   gcloud artifacts repositories create canchas --repository-format=docker --location=southamerica-east1
+#   gcloud redis instances create canchas-redis --size=1 --tier=standard --region=southamerica-east1 --network=default
+#   gcloud builds submit backend --tag southamerica-east1-docker.pkg.dev/PROYECTO/canchas/api
+#   gcloud run services replace backend/cloudrun/service.yaml --region southamerica-east1
+#   gcloud run services add-iam-policy-binding canchas-api --region southamerica-east1 --member=allUsers --role=roles/run.invoker
+#
+# Horario pico (dos instancias mínimas para tener redundancia), con dos trabajos de Cloud Scheduler:
+#   16:30 -> gcloud run services update canchas-api --region southamerica-east1 --min-instances=2
+#   23:30 -> gcloud run services update canchas-api --region southamerica-east1 --min-instances=0
+#
+# Cloud Run ya trae el balanceador: reparte los pedidos entre las instancias que haya y crea o
+# apaga instancias según la cantidad de pedidos simultáneos. Redis se reemplaza por Memorystore
+# (o Firestore) para que el estado siga afuera de las instancias.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: canchas-api
+spec:
+  template:
+    metadata:
+      annotations:
+        # Con 0 instancias mínimas no se paga nada cuando nadie usa la app (de madrugada).
+        autoscaling.knative.dev/minScale: "0"
+        # Techo de instancias: limita el gasto si hay un pico inesperado.
+        autoscaling.knative.dev/maxScale: "20"
+        # Memorystore sólo tiene IP privada: la instancia tiene que poder salir a la VPC.
+        run.googleapis.com/network-interfaces: '[{"network":"default","subnetwork":"default"}]'
+        run.googleapis.com/vpc-access-egress: private-ranges-only
+    spec:
+      # Tope de pedidos simultáneos por instancia. Cloud Run agrega instancias según la concurrencia
+      # y el uso de CPU, antes de llegar al tope. Es 40 porque FastAPI atiende los endpoints
+      # sincrónicos con 40 hilos: más pedidos por instancia sólo harían cola adentro.
+      containerConcurrency: 40
+      timeoutSeconds: 10
+      containers:
+        - image: southamerica-east1-docker.pkg.dev/PROYECTO/canchas/api
+          env:
+            - name: REDIS_HOST
+              value: "IP_DE_MEMORYSTORE"  # gcloud redis instances describe canchas-redis --region southamerica-east1 --format='value(host)'
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          startupProbe:
+            httpGet:
+              path: /vivo  # no depende de Redis

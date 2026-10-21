@@ -1,0 +1,34 @@
+== 0. Línea base: 1 réplica ==
+2000 pedidos, 50 en paralelo, 10.8 s (186 pedidos/s)
+OK: 2000  fallidos: 0
+latencia mediana 228 ms · p95 479 ms
+  réplica 484a5d304111: 2000 pedidos
+== 1. Carga con 3 réplicas ==
+2000 pedidos, 50 en paralelo, 6.2 s (325 pedidos/s)
+OK: 2000  fallidos: 0
+latencia mediana 145 ms · p95 250 ms
+  réplica 2c385586e384: 666 pedidos
+  réplica 2dbd3c730d8c: 667 pedidos
+  réplica 484a5d304111: 667 pedidos
+== 2. El mismo turno pedido 20 veces a la vez (20 usuarios distintos) ==
+respuestas: {201: 1, 409: 19} · réplicas que atendieron: 3
+disponibilidad: [{"hora":17,"libre":true},{"hora":18,"libre":true},{"hora":19,"libre":true},{"hora":20,"libre":false},{"hora":21,"libre":true},{"hora":22,"libre":true},{"hora":23,"libre":true}]
+el ganador reintenta su POST: 200 (idempotente: el turno ya es suyo)
+otro usuario intenta el mismo turno: 409
+== 3. Se cae una réplica (docker kill) a los 2 s de empezar la carga ==
+4000 pedidos, 50 en paralelo, 13.6 s (293 pedidos/s)
+OK: 4000  fallidos: 0
+latencia mediana 144 ms · p95 355 ms
+  réplica 2c385586e384: 283 pedidos
+  réplica 2dbd3c730d8c: 1859 pedidos
+  réplica 484a5d304111: 1858 pedidos
+[canchas-api-2 apagada a los 2 s]
+== 4. Escalado a 5 réplicas ==
+2000 pedidos, 50 en paralelo, 8.0 s (250 pedidos/s)
+OK: 2000  fallidos: 0
+latencia mediana 178 ms · p95 342 ms
+  réplica 2c385586e384: 400 pedidos
+  réplica 2dbd3c730d8c: 400 pedidos
+  réplica 484a5d304111: 400 pedidos
+  réplica 4d73af44eeca: 400 pedidos
+  réplica 7842d8896fff: 400 pedidos

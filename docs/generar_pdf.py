@@ -1,6 +1,7 @@
-"""Genera el PDF del TP2 desde docs/TP2-informe.md con Edge headless.
+"""Genera el PDF de un TP desde docs/<TP>-informe.md con Edge headless.
 
-Uso: python docs/generar_pdf.py [salida.pdf]  (requiere `pip install markdown` y Microsoft Edge)
+Uso: python docs/generar_pdf.py [TP2|TP7|...] [salida.pdf]  (por defecto TP2)
+Requiere `pip install markdown` y Microsoft Edge.
 Los comentarios <!-- TODO ... --> se muestran como recuadros "PENDIENTE" para que un
 borrador no pueda confundirse con la versión final.
 """
@@ -13,9 +14,11 @@ import markdown
 
 DOCS = Path(__file__).resolve().parent
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-salida = Path(sys.argv[1]) if len(sys.argv) > 1 else DOCS / "TP2-informe.pdf"
+args = sys.argv[1:]
+tp = args.pop(0) if args and not args[0].lower().endswith(".pdf") else "TP2"
+salida = Path(args[0]) if args else DOCS / f"{tp}-informe.pdf"
 
-md = (DOCS / "TP2-informe.md").read_text(encoding="utf-8")
+md = (DOCS / f"{tp}-informe.md").read_text(encoding="utf-8")
 pendientes = re.findall(r"<!--\s*TODO(.*?)-->", md, flags=re.S)
 md = re.sub(r"<!--\s*TODO[:,]?\s*(.*?)-->",
             lambda m: f'<div class="pendiente"><b>PENDIENTE:</b> {" ".join(m.group(1).split())}</div>',
@@ -40,6 +43,8 @@ hr { border: 0; border-top: 1px solid #ccc; }
 .capturas img { width: 100%; border: 1px solid #ccc; }
 figure.ancha { margin: 10px 0; break-inside: avoid; text-align: center; }
 figure.ancha img { max-width: 100%; max-height: 90mm; border: 1px solid #ccc; }
+figure.grande { break-before: page; }
+figure.grande img { width: 100%; max-height: 195mm; }
 figcaption { font-size: 8.5pt; color: #555; text-align: center; margin-top: 3px; }
 blockquote { margin: 8px 0; padding: 6px 10px; border-left: 4px solid #3b6fb6; background: #eef3fa; }
 blockquote p { margin: 0; }
@@ -47,7 +52,7 @@ blockquote p { margin: 0; }
 """
 html = f"""<!doctype html><html lang="es"><head><meta charset="utf-8">
 <base href="{DOCS.as_uri()}/"><style>{css}</style></head><body>{cuerpo}</body></html>"""
-tmp = DOCS.parent / "build" / "tp2-informe.html"
+tmp = DOCS.parent / "build" / f"{tp.lower()}-informe.html"
 tmp.parent.mkdir(exist_ok=True)
 tmp.write_text(html, encoding="utf-8")
 

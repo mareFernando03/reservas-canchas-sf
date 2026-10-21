@@ -1,0 +1,31 @@
+# Escalabilidad en local (TP3): 3 réplicas de la API detrás de un balanceador nginx,
+# con Redis como estado compartido. Uso:
+#   docker compose up -d --build
+#   docker compose up -d --scale api=5      (escalar horizontalmente)
+#   docker kill canchas-api-2               (probar la redundancia: tira una réplica)
+#   python backend/pruebas.py               (las cuatro pruebas del informe, de punta a punta)
+name: canchas
+
+services:
+  redis:
+    image: redis:7.4-alpine
+
+  api:
+    build: .
+    environment:
+      REDIS_HOST: redis
+    depends_on: [redis]
+    deploy:
+      replicas: 3
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/salud')"]
+      interval: 5s
+      retries: 3
+
+  balanceador:
+    image: nginx:1.27.5-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    depends_on: [api]

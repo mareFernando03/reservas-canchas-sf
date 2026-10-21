@@ -31,6 +31,14 @@ class LoginActivity : CicloDeVidaActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Si la app se abrió tocando una notificación, se registra cuál fue (TP6). Los push que
+        // muestra el sistema (app en segundo plano) no traen "origen": traen los datos de FCM.
+        val origen = intent.getStringExtra(Notificaciones.EXTRA_ORIGEN)
+            ?: if (intent.hasExtra("google.message_id")) "push" else null
+        if (origen != null && savedInstanceState == null) {
+            Medicion.evento(this, Medicion.ABRIR_DESDE_NOTIFICACION, "origen" to origen)
+        }
+
         // Firebase recuerda la sesión entre aperturas de la app: no hace falta volver a loguearse.
         if (auth.currentUser != null) {
             irALista()

@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 845" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444"/>
+    </marker>
+    <style>
+      .grupo { fill: #f6f8fa; stroke: #666; stroke-width: 1.5; }
+      .caja { fill: #fff; stroke: #333; stroke-width: 1.2; }
+      .firebase { fill: #fff7e6; stroke: #c77700; stroke-width: 1.2; }
+      .nuevo { fill: #f3f3f3; stroke: #777; stroke-width: 1.2; }
+      .tp4 { fill: #e8f0fb; stroke: #1f5fbf; stroke-width: 1.8; }
+      .tp4p { fill: #fff; stroke: #1f5fbf; stroke-width: 1.4; stroke-dasharray: 6 4; }
+      .propuesto { fill: #fff; stroke: #c77700; stroke-width: 1.2; stroke-dasharray: 6 4; }
+      .titulo { font-size: 15px; font-weight: 600; fill: #222; }
+      .nombre { font-size: 13px; font-weight: 600; fill: #111; }
+      .detalle { font-size: 11px; fill: #555; }
+      .linea { stroke: #444; stroke-width: 1.3; fill: none; marker-end: url(#flecha); }
+      .linea-nueva { stroke: #444; stroke-width: 1.3; fill: none; marker-end: url(#flecha); }
+      .linea-tp4 { stroke: #1f5fbf; stroke-width: 1.7; fill: none; marker-end: url(#flecha); }
+      .linea-tp4p { stroke: #1f5fbf; stroke-width: 1.4; fill: none; stroke-dasharray: 6 4; marker-end: url(#flecha); }
+    </style>
+  </defs>
+
+  <!-- Dispositivo -->
+  <rect class="grupo" x="20" y="20" width="560" height="690" rx="10"/>
+  <text class="titulo" x="36" y="46">Teléfono Android: app Reservas Canchas SF</text>
+
+  <rect class="caja" x="40" y="66" width="220" height="48" rx="6"/>
+  <text class="nombre" x="52" y="87">LoginActivity</text>
+  <text class="detalle" x="52" y="104">registro e ingreso</text>
+
+  <rect class="caja" x="40" y="146" width="220" height="48" rx="6"/>
+  <text class="nombre" x="52" y="167">MainActivity</text>
+  <text class="detalle" x="52" y="184">cercanía (TP7) · banner AdMob (TP4)</text>
+
+  <rect class="caja" x="40" y="226" width="220" height="48" rx="6"/>
+  <text class="nombre" x="52" y="247">DetalleCanchaActivity</text>
+  <text class="detalle" x="52" y="264">mapa embebido (TP7), llamar, reservar</text>
+
+  <rect class="caja" x="40" y="306" width="220" height="48" rx="6"/>
+  <text class="nombre" x="52" y="327">ReservaActivity</text>
+  <text class="detalle" x="52" y="344">clima (TP7) · seña online (propuesta)</text>
+
+  <path class="linea" d="M150,114 V144"/>
+  <path class="linea" d="M150,194 V224"/>
+  <path class="linea" d="M150,274 V304"/>
+
+  <text class="detalle" x="40" y="382">Todas heredan de CicloDeVidaActivity</text>
+  <text class="detalle" x="40" y="397">(log del ciclo de vida, barra superior, edge-to-edge)</text>
+
+  <rect class="caja" x="320" y="66" width="240" height="44" rx="6"/>
+  <text class="nombre" x="332" y="86">Canchas</text>
+  <text class="detalle" x="332" y="102">datos de ejemplo en memoria</text>
+
+  <rect class="caja" x="320" y="126" width="240" height="44" rx="6"/>
+  <text class="nombre" x="332" y="146">Medicion</text>
+  <text class="detalle" x="332" y="162">eventos de uso</text>
+
+  <rect class="nuevo" x="320" y="186" width="240" height="56" rx="6"/>
+  <text class="nombre" x="332" y="207">Clima</text>
+  <text class="detalle" x="332" y="223">cliente REST de Open-Meteo, en un</text>
+  <text class="detalle" x="332" y="237">hilo aparte (HttpURLConnection + JSON)</text>
+
+  <rect class="firebase" x="320" y="262" width="240" height="48" rx="6"/>
+  <text class="nombre" x="332" y="283">Firebase SDK</text>
+  <text class="detalle" x="332" y="300">auth · analytics · messaging (TP6)</text>
+
+  <rect class="nuevo" x="320" y="330" width="240" height="48" rx="6"/>
+  <text class="nombre" x="332" y="351">osmdroid (SDK de mapas)</text>
+  <text class="detalle" x="332" y="368">MapView + Marker, sin API key</text>
+
+  <rect class="nuevo" x="320" y="398" width="240" height="62" rx="6"/>
+  <text class="nombre" x="332" y="419">Play Services Location</text>
+  <text class="detalle" x="332" y="436">FusedLocationProviderClient:</text>
+  <text class="detalle" x="332" y="451">ubicación aproximada (GPS / red)</text>
+
+  <!-- dentro del teléfono -->
+  <path class="linea" d="M260,160 C290,160 290,88 318,88"/>
+  <path class="linea" d="M260,240 C290,240 290,148 318,148"/>
+  <path class="linea" d="M260,90 C300,90 290,280 318,282"/>
+  <path class="linea-nueva" d="M260,330 C290,330 290,214 318,214"/>
+  <path class="linea-nueva" d="M260,258 C292,258 292,354 318,354"/>
+  <path class="linea-nueva" d="M260,180 C286,180 286,428 318,428"/>
+
+
+  <rect class="tp4" x="320" y="478" width="240" height="48" rx="6"/>
+  <text class="nombre" x="332" y="499">Google Mobile Ads SDK</text>
+  <text class="detalle" x="332" y="516">AdView: banner al pie de la lista</text>
+
+  <rect class="tp4p" x="320" y="546" width="240" height="48" rx="6"/>
+  <text class="nombre" x="332" y="567">SDK de Mercado Pago</text>
+  <text class="detalle" x="332" y="584">propuesto: pagar la seña del turno</text>
+
+  <rect class="tp4p" x="320" y="614" width="240" height="62" rx="6"/>
+  <text class="nombre" x="332" y="635">Play Billing Library</text>
+  <text class="detalle" x="332" y="652">propuesto: suscripción</text>
+  <text class="detalle" x="332" y="666">"Quitar anuncios" (semana/mes/año)</text>
+
+  <path class="linea-tp4" d="M260,176 C280,176 280,502 318,502"/>
+  <path class="linea-tp4p" d="M260,344 C276,344 276,570 318,570"/>
+  <path class="linea-tp4p" d="M260,190 C270,190 268,645 318,645"/>
+
+  <!-- Nube -->
+  <rect class="grupo" x="620" y="20" width="260" height="690" rx="10"/>
+  <text class="titulo" x="636" y="46">Servicios en internet</text>
+
+  <rect class="firebase" x="640" y="66" width="220" height="50" rx="6"/>
+  <text class="nombre" x="652" y="87">Firebase Authentication</text>
+  <text class="detalle" x="652" y="104">usuarios con email y contraseña</text>
+
+  <rect class="firebase" x="640" y="132" width="220" height="50" rx="6"/>
+  <text class="nombre" x="652" y="153">Firebase Analytics</text>
+  <text class="detalle" x="652" y="170">eventos de uso para medir</text>
+
+  <rect class="nuevo" x="640" y="206" width="220" height="56" rx="6"/>
+  <text class="nombre" x="652" y="228">Open-Meteo API</text>
+  <text class="detalle" x="652" y="245">GET /v1/forecast: temperatura y</text>
+  <text class="detalle" x="652" y="258">probabilidad de lluvia por hora</text>
+
+  <rect class="nuevo" x="640" y="286" width="220" height="56" rx="6"/>
+  <text class="nombre" x="652" y="308">OpenStreetMap</text>
+  <text class="detalle" x="652" y="325">servidor de mosaicos (tiles)</text>
+  <text class="detalle" x="652" y="338">del mapa, estilo Mapnik</text>
+
+  <rect class="propuesto" x="640" y="370" width="220" height="62" rx="6"/>
+  <text class="nombre" x="652" y="392">Cloud Firestore</text>
+  <text class="detalle" x="652" y="410">propuesto: guardar reservas y</text>
+  <text class="detalle" x="652" y="424">mostrar disponibilidad (RF08)</text>
+
+  <path class="linea" d="M560,278 C600,278 600,92 638,92"/>
+  <path class="linea" d="M560,292 C606,292 604,158 638,158"/>
+  <path class="linea-nueva" d="M560,214 C600,214 600,234 638,234"/>
+  <path class="linea-nueva" d="M560,354 C600,354 600,314 638,314"/>
+  <path class="linea" d="M560,300 C612,300 606,400 638,400" stroke-dasharray="6 4"/>
+
+
+  <rect class="tp4" x="640" y="452" width="220" height="44" rx="6"/>
+  <text class="nombre" x="652" y="471">AdMob</text>
+  <text class="detalle" x="652" y="487">red de anuncios (IDs de prueba)</text>
+
+  <rect class="tp4p" x="640" y="508" width="220" height="62" rx="6"/>
+  <text class="nombre" x="652" y="528">API de reservas (TP3)</text>
+  <text class="detalle" x="652" y="545">propuesto: crea el pago con las</text>
+  <text class="detalle" x="652" y="559">credenciales y recibe la confirmación</text>
+
+  <rect class="tp4p" x="640" y="582" width="220" height="40" rx="6"/>
+  <text class="nombre" x="652" y="601">Mercado Pago</text>
+  <text class="detalle" x="652" y="615">propuesto: cobra seña + cargo</text>
+
+  <rect class="tp4p" x="640" y="632" width="220" height="40" rx="6"/>
+  <text class="nombre" x="652" y="651">Google Play (facturación)</text>
+  <text class="detalle" x="652" y="665">propuesto: cobra la suscripción</text>
+
+  <rect class="tp4p" x="640" y="682" width="220" height="22" rx="6"/>
+  <text class="detalle" x="652" y="697">propuesto: panel web de clubes</text>
+
+  <path class="linea-tp4" d="M560,502 C600,502 600,474 638,474"/>
+  <path class="linea-tp4p" d="M560,562 C600,562 600,538 638,538"/>
+  <path class="linea-tp4p" d="M750,570 V580"/>
+  <path class="linea-tp4p" d="M560,580 C605,580 605,602 638,602"/>
+  <path class="linea-tp4p" d="M560,650 C600,650 600,652 638,652"/>
+
+  <!-- Apps externas -->
+  <rect class="grupo" x="20" y="730" width="560" height="96" rx="10"/>
+  <text class="titulo" x="36" y="754">Otras apps del teléfono (Intents implícitos)</text>
+  <rect class="caja" x="36" y="766" width="120" height="44" rx="6"/>
+  <text class="nombre" x="46" y="785">Marcador</text>
+  <text class="detalle" x="46" y="801">ACTION_DIAL</text>
+  <rect class="caja" x="166" y="766" width="120" height="44" rx="6"/>
+  <text class="nombre" x="176" y="785">Mapas</text>
+  <text class="detalle" x="176" y="801">"Cómo llegar", geo:</text>
+  <rect class="caja" x="296" y="766" width="120" height="44" rx="6"/>
+  <text class="nombre" x="306" y="785">Compartir</text>
+  <text class="detalle" x="306" y="801">ACTION_SEND</text>
+
+  <!-- Referencia -->
+  <rect class="nuevo" x="640" y="746" width="40" height="22" rx="4"/>
+  <text class="detalle" x="690" y="761">TP7</text>
+  <rect class="firebase" x="640" y="778" width="40" height="22" rx="4"/>
+  <text class="detalle" x="690" y="793">Firebase</text>
+  <rect class="propuesto" x="640" y="810" width="40" height="22" rx="4"/>
+  <text class="detalle" x="690" y="825">componente propuesto</text>
+  <rect class="tp4" x="760" y="746" width="40" height="22" rx="4"/>
+  <text class="detalle" x="810" y="761">TP4</text>
+  <rect class="tp4p" x="760" y="778" width="40" height="22" rx="4"/>
+  <text class="detalle" x="810" y="793">TP4 propuesto</text>
+</svg>

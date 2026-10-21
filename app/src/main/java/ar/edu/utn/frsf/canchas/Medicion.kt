@@ -15,6 +15,8 @@ object Medicion {
     const val VER_MAPA = "ver_mapa"
     const val INICIAR_RESERVA = "iniciar_reserva"
     const val CONFIRMAR_RESERVA = "confirmar_reserva"
+    // TP6: cuántos vuelven a la app por una notificación (y por cuál), para medir la retención.
+    const val ABRIR_DESDE_NOTIFICACION = "abrir_desde_notificacion"
 
     fun evento(context: Context, nombre: String, vararg parametros: Pair<String, Any?>) {
         FirebaseAnalytics.getInstance(context).logEvent(nombre, bundleOf(*parametros))

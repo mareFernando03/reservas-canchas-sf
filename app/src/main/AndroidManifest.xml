@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Firebase (login y medición de uso) se comunica con sus servidores. -->
+    <!-- Firebase, el mapa de OpenStreetMap y el pronóstico de Open-Meteo usan la red. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- osmdroid revisa el estado de la red antes de bajar los mosaicos del mapa. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--
+      Ubicación, para ordenar las canchas por cercanía. Se piden las dos en tiempo de ejecución:
+      la aproximada se corre 1 a 2 km, así que sólo con la precisa se reordena la lista.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- TP6: desde Android 13 mostrar notificaciones requiere permiso del usuario. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <!--
       Intents implícitos que usa la app. Desde Android 11 hay que declararlos
@@ -23,11 +33,39 @@
     </queries>
 
     <application
+        android:name=".CanchasApp"
         android:allowBackup="true"
         android:icon="@android:drawable/sym_def_app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservasCanchas">
+
+        <!--
+          TP4: identificador de la app en AdMob. Es el ID de PRUEBA público de Google: muestra
+          anuncios de ejemplo y no genera ingresos. Al publicar se reemplaza por el de la cuenta.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!-- TP6: recibe los mensajes push de Firebase Cloud Messaging. -->
+        <service
+            android:name=".MensajesPush"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Canal que usa FCM para los push que llegan con la app en segundo plano. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="novedades" />
+
+        <!-- Ícono de los push que muestra el sistema con la app en segundo plano (el mismo que los locales). -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@android:drawable/ic_popup_reminder" />
 
         <!-- Pantalla de inicio: la única que se abre desde el launcher. -->
         <activity
